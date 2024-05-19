@@ -1,7 +1,11 @@
 const express=require("express");
 const mongoose=require("mongoose");
 const TaskSchema=require("./model");
-mongoose.connect("mongodb+srv://lakshmichaitrika2002:task@task.oaofvss.mongodb.net/?retryWrites=true&w=majority&appName=task")
+const cors=require("cors")
+const dotenv=require("dotenv");
+dotenv.config();
+console.log(process.env.MONGO)
+mongoose.connect(process.env.MONGO)
 .then(()=>{
     console.log("db connected")
 })
@@ -10,6 +14,9 @@ mongoose.connect("mongodb+srv://lakshmichaitrika2002:task@task.oaofvss.mongodb.n
 })
 const app=express()
 app.use(express.json())
+app.use(cors({
+    origin:"*"
+}))
 app.listen("5000",()=>{
     console.log("server is running at 5000")
 })
