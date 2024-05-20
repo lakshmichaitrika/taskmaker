@@ -7,7 +7,8 @@
     "start":"node server/index",
     "server":"nodemon server/index",
     "client":"npm --prefix client run dev",
-    "dev":"concurrently \"npm run server\" \"npm run client\" "
+    "dev":"concurrently \"npm run server\" \"npm run client\" ",
+    "build":"npm install && npm install --prefix client && npm run bulid --prefix client"
   },
   "keywords": [],
   "author": "",

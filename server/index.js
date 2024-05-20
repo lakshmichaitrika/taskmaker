@@ -3,8 +3,10 @@ const mongoose=require("mongoose");
 const TaskSchema=require("./model");
 const cors=require("cors")
 const dotenv=require("dotenv");
+const path=require("path");
+__dirname=path.resolve();
 dotenv.config();
-console.log(process.env.MONGO)
+
 mongoose.connect(process.env.MONGO)
 .then(()=>{
     console.log("db connected")
@@ -14,9 +16,15 @@ mongoose.connect(process.env.MONGO)
 })
 const app=express()
 app.use(express.json())
+app.use(express.static(path.join(__dirname,'/client/dist')))
 app.use(cors({
     origin:"*"
 }))
+
+app.get("*",(req,res)=>{
+    res.sendFile(path.join(__dirname,'client','dist','index.html'))
+})
+
 app.listen("5000",()=>{
     console.log("server is running at 5000")
 })
